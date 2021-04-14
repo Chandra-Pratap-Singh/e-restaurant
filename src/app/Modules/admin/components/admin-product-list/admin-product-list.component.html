@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-between p-3">
+  <h3>Products</h3>
+  <button class="btn btn-primary" [routerLink]="['/admin', 'product', 'new']">
+    New Product
+  </button>
+</div>
+<div>
+  <app-loader *ngIf="$productsLoader | async; else products"></app-loader>
+  <ng-template #products>
+    <div *ngFor="let product of $productList | async">
+      <div
+        class="cursor-pointer product"
+        [routerLink]="['/admin', 'product', 'edit', product.productId]"
+      >
+        <app-product-horizontal-card
+          [product]="product"
+          [isOrderItem]="true"
+        ></app-product-horizontal-card>
+      </div>
+    </div>
+  </ng-template>
+</div>

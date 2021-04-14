@@ -1,0 +1,10 @@
+.toasts {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 200px;
+  z-index: 1000;
+}
+.toast {
+  opacity: 0.8;
+}

@@ -1,0 +1,6 @@
+<h3 class="mb-3">Completed Orders</h3>
+<div *ngFor="let order of $completedOrders | async" class="mb-2">
+  <app-admin-horizontal-order-card
+    [order]="order"
+  ></app-admin-horizontal-order-card>
+</div>

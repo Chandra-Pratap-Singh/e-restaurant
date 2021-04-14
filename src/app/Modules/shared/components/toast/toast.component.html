@@ -1,0 +1,10 @@
+<div class="toasts">
+  <ng-container *ngFor="let toast of toasts">
+    <ngb-toast
+      [autohide]="false"
+      [ngClass]="toastTypestoClassMapping[toast.type] + ' toast'"
+    >
+      {{ toast.message }}
+    </ngb-toast>
+  </ng-container>
+</div>

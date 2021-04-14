@@ -1,0 +1,73 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer
+    #drawer
+    class="example-sidenav"
+    [mode]="isScreenBig ? 'side' : 'over'"
+    [opened]="openSidebar"
+    (openedChange)="toggleSidenavBar($event)"
+  >
+    <div *ngIf="$categoriesLoader | async; else categories">
+      <app-loader [varient]="categoriesLoaderVarient"></app-loader>
+    </div>
+    <ng-template #categories>
+      <div class="bg-light h-100 p-3">
+        <div class="text-right" *ngIf="!isScreenBig">
+          <fa-icon
+            [icon]="closeIcon"
+            class="cursor-pointer"
+            (click)="drawer.toggle()"
+          ></fa-icon>
+        </div>
+        <div class="p-3">
+          <button
+            [routerLink]="['/shop', 'product-list']"
+            class="btn btn-lg btn-block btn-secondary"
+            (click)="!isScreenBig && drawer.toggle()"
+          >
+            All
+          </button>
+        </div>
+        <div class="p-3" *ngFor="let category of $categories | async">
+          <button
+            [routerLink]="['/shop', 'product-list', category.category]"
+            class="btn btn-lg btn-block btn-secondary"
+            (click)="!isScreenBig && drawer.toggle()"
+          >
+            {{ category.category }}
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </mat-drawer>
+  <div>
+    <div *ngIf="$productsLoader | async; else products">
+      <app-loader [varient]="productsLoaderVarient"></app-loader>
+    </div>
+    <ng-template #products>
+      <div>
+        <button
+          class="navbar-toggler d-lg-none"
+          type="button"
+          mat-button
+          (click)="drawer.toggle()"
+        >
+          &#9776;
+        </button>
+        <div class="d-flex justify-content-start flex-wrap w-100 py-4">
+          <div
+            *ngFor="let product of $productList | async"
+            class="d-flex justify-content-center product-card-container"
+          >
+            <app-product-card
+              [product]="product"
+              [presentInCart]="presentInCart(product.productId)"
+              (updateCart)="updateCart($event, product)"
+              (addItemToCart)="addItemToCart(product.productId)"
+              (removeItemFromCart)="removeItemFromCart(product.productId)"
+            ></app-product-card>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</mat-drawer-container>

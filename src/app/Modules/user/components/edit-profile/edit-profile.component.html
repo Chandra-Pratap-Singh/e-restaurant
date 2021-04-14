@@ -1,0 +1,46 @@
+<app-loader
+  [fullScreen]="true"
+  *ngIf="$updateUserProfileLoader | async"
+></app-loader>
+
+<div class="row m-0 justify-content-center">
+  <form
+    class="col-md-6 bg-light p-3 m-3"
+    (ngSubmit)="save()"
+    #profileForm="ngForm"
+  >
+    <div class="mb-3">
+      <label for="name" class="form-label">Name</label>
+      <input
+        type="email"
+        class="form-control"
+        id="name"
+        name="name"
+        [(ngModel)]="user.name"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
+      <input
+        type="text"
+        class="form-control"
+        id="phone"
+        name="phone"
+        [(ngModel)]="user.phone"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email </label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        name="email"
+        [(ngModel)]="user.email"
+      />
+    </div>
+    <div class="mb-3 text-right">
+      <button class="btn btn-lg btn-success">Save</button>
+    </div>
+  </form>
+</div>

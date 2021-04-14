@@ -1,0 +1,75 @@
+/* You can add global styles to this file, and also import other style files */
+
+:root {
+  --theme-orange: #ff9900;
+  --theme-light-orange: #ffad33;
+  --theme-dark-orange: #e68a00;
+}
+
+.bg-orange {
+  background-color: var(--theme-orange);
+}
+
+.text-orange {
+  color: var(--theme-orange);
+}
+
+.border-bottom-orange {
+  border-bottom: 2px solid var(--theme-orange);
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cursor-move {
+  cursor: move;
+}
+
+a:active {
+  border: none !important;
+  text-decoration: none !important;
+}
+
+.active {
+  background-color: var(--theme-dark-orange) !important;
+  border: none !important;
+  text-decoration: none !important;
+}
+
+.header {
+  background-color: var(--theme-orange);
+  min-height: 70px;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.nav-item {
+  border-bottom: 2px solid var(--theme-orange);
+}
+.nav-item:hover {
+  border-bottom: 2px solid white;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.logo {
+  border-radius: 5px;
+  border: 1px solid white;
+}
+
+html,
+body {
+  height: 100%;
+}
+/* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

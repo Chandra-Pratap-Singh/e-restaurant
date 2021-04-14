@@ -1,0 +1,16 @@
+<div
+  class="d-flex justify-content-center align-items-center"
+  [ngClass]="fullScreen ? 'fullscreen' : ''"
+>
+  <div
+    class="spinner-border text-dark"
+    role="status"
+    *ngIf="varient === loaderVarients.DEFAULT; else gifLoader"
+  ></div>
+  <ng-template #gifLoader>
+    <div>
+      <img [src]="loaderImage" />
+      <h3 class="text-center">Loading ...</h3>
+    </div>
+  </ng-template>
+</div>

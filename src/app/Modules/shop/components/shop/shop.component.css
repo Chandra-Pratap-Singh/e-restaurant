@@ -1,0 +1,8 @@
+.left-nav {
+  width: 350px;
+  min-height: calc(100vh - 70px);
+  background-color: #f2f2f2;
+}
+.right-product-list {
+  width: calc(100vw - 360px) !important;
+}

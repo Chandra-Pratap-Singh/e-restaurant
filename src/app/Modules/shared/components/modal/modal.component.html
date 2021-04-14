@@ -1,0 +1,24 @@
+<div
+  class="modal-container d-flex justify-content-around align-items-center"
+  tabindex="-1"
+  *ngIf="open"
+  (click)="closeModal()"
+>
+  <div
+    class="modal-dialog w-lg-50 w-100"
+    #modalDialog
+    (click)="stopPropogation($event)"
+  >
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ title }}</h5>
+        <button type="button" class="close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

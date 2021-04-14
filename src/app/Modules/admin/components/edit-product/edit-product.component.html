@@ -1,0 +1,166 @@
+<app-loader
+  *ngIf="$addorUpdateProduct | async"
+  [fullScreen]="true"
+></app-loader>
+<app-loader *ngIf="$productLoader | async; else productForm"></app-loader>
+<ng-template #productForm>
+  <div class="row bg-white p-lg-5 p-md-3">
+    <div class="col-lg-8 order-2">
+      <form (ngSubmit)="save()" #formObj="ngForm">
+        <div class="form-group">
+          <label for="productName">Name</label>
+          <input
+            type="type"
+            name="productName"
+            class="form-control"
+            id="productName"
+            required
+            [(ngModel)]="product.name"
+            (keyup)="updatePreview()"
+          />
+        </div>
+        <div class="form-group">
+          <label for="productName">Description</label>
+          <input
+            type="type"
+            name="productDescription"
+            class="form-control"
+            id="productDescription"
+            required
+            [(ngModel)]="product.description"
+            (keyup)="updatePreview()"
+          />
+        </div>
+        <div class="form-group">
+          <label for="productName">Image</label>
+          <div class="custom-file">
+            <input
+              type="file"
+              name="productImage"
+              class="custom-file-input"
+              id="productImage"
+              [required]="!product.img"
+              ngModel
+              (change)="updateImage($event)"
+            />
+            <label class="custom-file-label" for="productImage">{{
+              !!imageName ? imageName : "Choose file"
+            }}</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="productName">Price</label>
+          <input
+            type="type"
+            name="productPrice"
+            class="form-control"
+            id="productPrice"
+            required
+            [(ngModel)]="product.price"
+            (keyup)="updatePreview()"
+          />
+        </div>
+        <div class="form-group d-flex">
+          <label class="mx-2">Available</label>
+          <div class="custom-control custom-switch">
+            <input
+              type="checkbox"
+              [checked]="product.available"
+              class="custom-control-input"
+              id="customSwitch1"
+              name="available"
+              (change)="toggleAvailability()"
+            />
+            <label class="custom-control-label" for="customSwitch1"></label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="productName">Categories</label>
+          <app-loader
+            *ngIf="$categoriesLoader | async; else categories"
+          ></app-loader>
+          <ng-template #categories>
+            <div
+              *ngFor="let category of $categories | async; index as i"
+              class="px-3"
+            >
+              <div class="form-group form-check">
+                <input
+                  type="checkbox"
+                  name="category"
+                  [value]="category._id"
+                  [checked]="isCategoryChecked(category)"
+                  required
+                  class="form-check-input"
+                  [id]="i"
+                  (change)="updatecategory($event)"
+                />
+                <label class="form-check-label" [for]="i">{{
+                  category.category
+                }}</label>
+              </div>
+            </div>
+          </ng-template>
+          <div class="px-3">
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              (click)="openAddCategory = true"
+            >
+              Add New Category
+            </button>
+          </div>
+          <app-modal
+            [open]="openAddCategory"
+            title="New Category"
+            (close)="openAddCategory = false"
+          >
+            <app-add-category
+              (completed)="openAddCategory = false"
+            ></app-add-category>
+          </app-modal>
+        </div>
+        <div class="d-flex justify-content-end">
+          <button
+            type="button"
+            class="btn btn-danger btn-lg m-2"
+            (click)="openDeleteConfirmationBox = true"
+            *ngIf="variant === 'edit'; else cancelButton"
+          >
+            Delete
+          </button>
+          <ng-template #cancelButton>
+            <button
+              type="button"
+              class="btn btn-danger btn-lg m-2"
+              (click)="cancle()"
+            >
+              Cancle
+            </button>
+          </ng-template>
+          <button
+            type="submit"
+            [disabled]="formObj.invalid"
+            class="btn btn-primary btn-lg m-2"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-4 order-1 mb-3">
+      <div class="d-flex justify-content-around">
+        <app-product-card [product]="product"></app-product-card>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<app-confirmation-pop-up
+  [open]="openDeleteConfirmationBox"
+  title="Delete Product"
+  message="Are you sure, you want to delete this Product?"
+  (close)="openDeleteConfirmationBox = false"
+  (yes)="delete()"
+  (no)="openDeleteConfirmationBox = false"
+></app-confirmation-pop-up>

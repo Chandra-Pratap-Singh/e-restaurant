@@ -1,0 +1,27 @@
+<div class="p-md-3 p-2 bg-light">
+  <div class="row g-3">
+    <div class="col order-2 order-lg-1 text-left my-2 d-flex flex-wrap">
+      <app-badge>{{ address?.identifier }}</app-badge>
+      <app-badge>{{ address?.name }}</app-badge>
+      <app-badge>{{ address?.phone }}</app-badge>
+      <app-badge>{{ address?.email }}</app-badge>
+    </div>
+    <div class="col order-1 order-lg-2 text-right my-2">
+      <button
+        class="btn btn-outline-primary mr-2"
+        [routerLink]="['/shop', 'address', address?.addressId]"
+      >
+        <fa-icon [icon]="editIcon"></fa-icon> Edit
+      </button>
+      <button
+        class="btn btn-outline-danger"
+        (click)="deleteAddress(address?.addressId)"
+      >
+        <fa-icon [icon]="deleteIcon"></fa-icon> Delete
+      </button>
+    </div>
+  </div>
+  <div class="p-2">
+    {{ address?.address }}
+  </div>
+</div>

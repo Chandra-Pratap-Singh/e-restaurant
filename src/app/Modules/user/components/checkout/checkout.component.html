@@ -1,0 +1,44 @@
+<app-loader [fullScreen]="true" *ngIf="$checkoutLoader | async"></app-loader>
+<div class="row p-2 m-0">
+  <div class="col-lg-8 order-2 order-lg-1">
+    <h5>Your Cart Items</h5>
+    <div *ngFor="let item of $cartItemList | async">
+      <app-product-horizontal-card
+        [product]="item.product"
+        [quantity]="item.quantity"
+        (addItemToCart)="addItemToCart(item.product.productId)"
+        (removeItemFromCart)="removeItemFromCart(item.product.productId)"
+        [isCartItem]="true"
+      ></app-product-horizontal-card>
+    </div>
+    <div class="row justify-content-between m-2">
+      <div class="col-auto">
+        <strong> Total: &#8377;{{ $totalCartValue | async }} </strong>
+      </div>
+      <div class="col-auto">
+        <button
+          class="btn btn-success"
+          (click)="order()"
+          [disabled]="!($activeAddress | async)"
+        >
+          Place Order
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4 order-1 order-lg-2">
+    <div class="bg-white p-3">
+      <h3>Deliver To:</h3>
+      <mat-radio-group (change)="updateDeliveryAddress($event)">
+        <div class="p-2 m-2" *ngFor="let address of $addresses | async">
+          <mat-radio-button [value]="address" [checked]="address.isPrimary">
+            <div class="text-muted">
+              {{ address?.identifier || address.name }}
+            </div>
+          </mat-radio-button>
+          <div>{{ address.address }}</div>
+        </div>
+      </mat-radio-group>
+    </div>
+  </div>
+</div>

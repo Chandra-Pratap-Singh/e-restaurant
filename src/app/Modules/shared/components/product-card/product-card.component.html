@@ -1,0 +1,56 @@
+<div class="card shadow" style="width: 18rem">
+  <img [src]="product.img" height="200px" class="card-img-top" alt="..." />
+  <div class="card-body">
+    <div class="row">
+      <div class="col-8">
+        <h5 class="card-title m-0 p-0">{{ product.name }}</h5>
+      </div>
+      <div class="col-4">
+        <strong> &#8377;{{ product.price }}</strong>
+      </div>
+    </div>
+
+    <div class="card-text">
+      <app-rating [rating]="product.rating" [readOnly]="true"></app-rating>
+      {{ product.ratingProvider }}
+      <div class="text-muted">{{ product.description }}</div>
+    </div>
+    <br />
+
+    <button
+      *ngIf="(presentInCart | async) < 1; else addedQuantity"
+      (click)="addItemToCart()"
+      class="btn btn-success w-100"
+    >
+      <app-loader *ngIf="cartLoader; else add"></app-loader>
+      <ng-template #add> ADD </ng-template>
+    </button>
+    <ng-template #addedQuantity>
+      <div class="row">
+        <div class="col-3">
+          <button
+            class="btn btn-danger btn-block"
+            (click)="removeItemFromCart()"
+          >
+            -
+          </button>
+        </div>
+        <div
+          class="col-6 bg-secondary text-white text-center lead p-1 d-flex align-items-center justify-content-center font-weight-bold"
+        >
+          <app-loader *ngIf="cartLoader; else cartItemDetails"></app-loader>
+          <ng-template #cartItemDetails>
+            {{ presentInCart | async }} &nbsp;<span class="font-weight-light"
+              >&#8377;{{ +(presentInCart | async) * product.price }}
+            </span>
+          </ng-template>
+        </div>
+        <div class="col-3">
+          <button (click)="addItemToCart()" class="btn btn-success btn-block">
+            +
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

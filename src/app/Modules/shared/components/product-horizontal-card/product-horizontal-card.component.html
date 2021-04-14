@@ -1,0 +1,50 @@
+<div
+  class="row mx-2 py-2 border-bottom"
+  [ngClass]="!isOrderItem && !product.available ? 'unavailable-product' : ''"
+>
+  <div class="col-md-2 text-center">
+    <img class="dish-image" [src]="product.img" height="70px" />
+  </div>
+  <div class="col-md-8">
+    <strong
+      [ngClass]="!isOrderItem && !product.available ? 'text-danger' : ''"
+      >{{ product.name }}</strong
+    ><br />
+    <span class="text-muted">{{ product.description }}</span>
+  </div>
+  <div class="col-md-2 d-flex flex-column align-items-center">
+    <div class="d-flex">
+      <ng-container *ngIf="!isOrderItem; else totalCost">
+        <app-loader *ngIf="cartLoader; else totalPrice"></app-loader>
+        <ng-template #totalPrice
+          >&#8377;{{ product.price * productQuantity }}</ng-template
+        >
+      </ng-container>
+      <ng-template #totalCost>&#8377;{{ product.price }}</ng-template>
+    </div>
+    <div class="d-flex">
+      <button
+        *ngIf="isCartItem"
+        class="btn btn-light text-danger cursor-pointer mx-2 p-0"
+        (click)="removeItemFromCart()"
+        [disabled]="!product?.available"
+      >
+        <fa-icon [icon]="minusIcon"></fa-icon>
+      </button>
+      <div>
+        <app-loader *ngIf="cartLoader; else quantity"></app-loader>
+        <ng-template #quantity>
+          <h5 class="mx-2">{{ productQuantity }}</h5>
+        </ng-template>
+      </div>
+      <button
+        *ngIf="isCartItem"
+        class="btn btn-light text-success cursor-pointer mx-2 p-0"
+        (click)="addItemToCart()"
+        [disabled]="!product?.available"
+      >
+        <fa-icon [icon]="plusIcon"></fa-icon>
+      </button>
+    </div>
+  </div>
+</div>

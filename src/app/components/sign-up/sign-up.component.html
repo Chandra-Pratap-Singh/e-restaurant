@@ -1,0 +1,138 @@
+<div class="sign-up">
+  <div class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <form [formGroup]="signUpForm">
+    <div class="form-group">
+      <label>Name <span class="text-danger">*</span></label>
+      <input type="text" class="form-control" formControlName="name" required />
+      <span
+        *ngIf="signUpForm.get('name').invalid && signUpForm.get('name').touched"
+        class="text-danger px-1"
+        >Please enter valid Name</span
+      >
+    </div>
+    <div class="form-group">
+      <label>Email <span class="text-danger">*</span></label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        required
+      />
+      <span
+        *ngIf="
+          signUpForm.get('email').invalid && signUpForm.get('email').touched
+        "
+        class="text-danger px-1"
+        >Please enter valid Email</span
+      >
+    </div>
+    <div class="form-group">
+      <label>Phone Number <span class="text-danger">*</span></label>
+      <input
+        type="tel"
+        class="form-control"
+        formControlName="phone"
+        maxlength="10"
+        required
+      />
+      <span
+        *ngIf="
+          signUpForm.get('phone').invalid && signUpForm.get('phone').touched
+        "
+        class="text-danger px-1"
+        >Please enter valid Phone Number</span
+      >
+    </div>
+    <div class="form-group">
+      <label>Password <span class="text-danger">*</span></label>
+      <div class="input-group">
+        <input
+          [type]="showPassword ? 'text' : 'password'"
+          class="form-control"
+          formControlName="password"
+          required
+          name="password"
+        />
+        <span class="input-group-text"
+          ><fa-icon
+            [icon]="showPassword ? HidePasswordIcon : showPasswordIcon"
+            class="cursor-pointer"
+            (click)="showPassword = !showPassword"
+          ></fa-icon
+        ></span>
+      </div>
+      <span
+        *ngIf="
+          signUpForm.get('password').invalid &&
+          signUpForm.get('password').touched
+        "
+        class="text-danger px-1"
+        >Please enter valid alpha-numeric Passowrd</span
+      >
+    </div>
+    <div class="form-group">
+      <label>Confirm Password <span class="text-danger">*</span></label>
+      <div class="input-group">
+        <input
+          [type]="showConfirmPassword ? 'text' : 'password'"
+          [ngClass]="
+            signUpForm.get('password').value !==
+            signUpForm.get('confirmPassword').value
+              ? 'form-control border-danger'
+              : 'form-control'
+          "
+          formControlName="confirmPassword"
+          required
+        />
+        <span class="input-group-text"
+          ><fa-icon
+            [icon]="showConfirmPassword ? HidePasswordIcon : showPasswordIcon"
+            class="cursor-pointer"
+            (click)="showConfirmPassword = !showConfirmPassword"
+          ></fa-icon
+        ></span>
+      </div>
+      <span
+        *ngIf="
+          (signUpForm.get('confirmPassword').invalid &&
+            signUpForm.get('confirmPassword').touched) ||
+          signUpForm.get('password').value !==
+            signUpForm.get('confirmPassword').value
+        "
+        class="text-danger px-1"
+        >Password Missmatch
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label"
+        >Address <span class="text-danger">*</span></label
+      >
+      <textarea
+        class="form-control"
+        rows="3"
+        formControlName="address"
+        required
+      ></textarea>
+      <span
+        *ngIf="
+          signUpForm.get('address').invalid && signUpForm.get('address').touched
+        "
+        class="text-danger px-1"
+        >Password enter a valid Address</span
+      >
+    </div>
+    <div class="d-flex justify-content-end p-2">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        (click)="singUp()"
+        [disabled]="loader || signUpForm.invalid"
+      >
+        <div class="d-flex">
+          Sign Up
+          <app-loader class="mx-2" *ngIf="loader"></app-loader>
+        </div>
+      </button>
+    </div>
+  </form>
+</div>

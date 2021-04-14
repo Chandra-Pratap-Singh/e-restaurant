@@ -1,0 +1,38 @@
+<app-loader *ngIf="$fetchUserLoader | async; else userProfile"></app-loader>
+<ng-template #userProfile>
+  <div class="row justify-content-center m-0">
+    <div class="col-md-6 bg-light p-3 m-3">
+      <div class="text-right">
+        <button
+          class="btn btn-outline-primary"
+          [routerLink]="['/shop', 'edit-profile']"
+        >
+          Edit
+        </button>
+      </div>
+      <h5 class="m-2">Name: {{ ($user | async)?.name }}</h5>
+      <h5 class="m-2">Phone: {{ ($user | async)?.phone }}</h5>
+      <h5 class="m-2">Email: {{ ($user | async)?.email }}</h5>
+      <div class="text-primary my-5 mx-2">
+        <div
+          class="cursor-pointer mb-2"
+          [routerLink]="['/shop', 'address-list']"
+        >
+          Manage Address
+        </div>
+        <div class="cursor-pointer mb-2" [routerLink]="['/shop', 'order-list']">
+          My Orders
+        </div>
+        <div class="cursor-pointer mb-2" [routerLink]="['/shop', 'checkout']">
+          My Cart
+        </div>
+        <div
+          class="cursor-pointer mb-2"
+          [routerLink]="['/shop', 'change-password']"
+        >
+          Change Password
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,40 @@
+<div class="border">
+  <div class="bg-light d-flex justify-content-between p-3 w-100">
+    <div>
+      {{ order.orderId }}
+    </div>
+    <div>{{ order.status }}</div>
+    <div>{{ order.orderedDateTime | date }}</div>
+  </div>
+  <div class="p-3">
+    <div>
+      <span class="text-muted">Customer: </span
+      >{{ order?.customer?.snapshot?.name }} ~
+      {{ order?.customer?.snapshot?.phone }}
+    </div>
+    <div>
+      <span class="text-muted">Delivered at: </span>
+      {{ order?.customer?.address?.address }}
+    </div>
+    <div>
+      <span class="text-muted">Items:</span>
+      <ol>
+        <li *ngFor="let item of order.products" class="p-1 border-bottom">
+          <div class="row">
+            <div class="col-8">{{ item?.snapshot?.name }}</div>
+            <div class="col-4">
+              {{ item.quantity }} X {{ item?.snapshot?.price }} = &#8377;{{
+                +item.quantity * +item?.snapshot?.price
+              }}
+            </div>
+          </div>
+        </li>
+      </ol>
+      <div class="p-2">
+        <span class="text-muted">Total:</span> &#8377;{{
+          getTotalPrice(order.products)
+        }}
+      </div>
+    </div>
+  </div>
+</div>

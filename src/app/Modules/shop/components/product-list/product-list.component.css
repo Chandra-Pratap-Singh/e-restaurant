@@ -1,0 +1,21 @@
+.left-nav {
+  width: 350px;
+  min-height: calc(100vh - 70px);
+  background-color: #f2f2f2;
+}
+.right-product-list {
+  width: calc(100vw - 360px) !important;
+}
+
+.product-card-container {
+  width: 350px;
+  height: 450px;
+}
+
+:host ::ng-deep .ng-sidebar {
+  z-index: 1 !important;
+}
+
+.example-container {
+  min-height: calc(100vh - 70px);
+}

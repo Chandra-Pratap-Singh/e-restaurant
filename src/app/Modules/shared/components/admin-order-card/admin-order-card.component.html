@@ -1,0 +1,72 @@
+<div class="card p-2 mb-3 div active-order-card">
+  <div class="row justify-content-between">
+    <div class="col-auto text-muted small">{{ order.orderId }}</div>
+
+    <div class="col-auto d-flex">
+      <div
+        ngbDropdown
+        [autoClose]="true"
+        placement="left-top"
+        class="d-inline-block"
+      >
+        <fa-icon
+          [icon]="menuIcon"
+          class="cursor-pointer mr-2"
+          ngbDropdownToggle
+        ></fa-icon>
+        <div ngbDropdownMenu>
+          <ng-container *ngFor="let status of orderStatuses">
+            <button ngbDropdownItem (click)="updateOrderStatus(status)">
+              Mark {{ status }}
+            </button>
+          </ng-container>
+        </div>
+      </div>
+      <div>
+        <fa-icon
+          [icon]="nextIcon"
+          class="cursor-pointer"
+          (click)="moveToNextStep()"
+        ></fa-icon>
+      </div>
+    </div>
+  </div>
+  <div class="cursor-move">
+    <div class="text-muted small">Items:</div>
+    <span *ngFor="let item of order.products">
+      {{ item?.snapshot?.name }}({{ item?.quantity }})
+    </span>
+    <div class="p-1">
+      <div (click)="isCollapsed = !isCollapsed" class="text-primary">
+        {{ isCollapsed ? "Show Full" : "Show Less" }}
+      </div>
+    </div>
+    <div [ngbCollapse]="isCollapsed">
+      <div class="row mb-2">
+        <div class="col">
+          <div class="text-muted small">Total Bill</div>
+          <div>&#8377;{{ getTotalPrice(order?.products) }}</div>
+        </div>
+        <div class="col">
+          <div class="text-muted small">Order Time</div>
+          <div>
+            {{ order.orderedDateTime | date }}
+          </div>
+        </div>
+      </div>
+      <div class="mb-2">
+        <div class="text-muted small">Customer</div>
+        <div>
+          {{ order?.customer?.snapshot?.name }} ~
+          {{ order?.customer?.snapshot?.phone }}
+        </div>
+      </div>
+      <div class="mb-2">
+        <div class="text-muted small">Deliver To</div>
+        <div>
+          {{ order?.customer?.snapshot?.address?.address }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

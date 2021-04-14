@@ -1,0 +1,18 @@
+<app-loader
+  *ngIf="($addressListLoader | async) || ($deleteAddressLoader | async)"
+  [fullScreen]="true"
+></app-loader>
+
+<div class="p-3">
+  <div class="m-2" *ngFor="let address of $addressList | async">
+    <app-address-card [address]="address"></app-address-card>
+  </div>
+  <div class="text-right m-2">
+    <button
+      class="btn btn-outline btn-primary"
+      [routerLink]="['/shop', 'address', 'new']"
+    >
+      Add New Address
+    </button>
+  </div>
+</div>

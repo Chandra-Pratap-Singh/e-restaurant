@@ -1,0 +1,19 @@
+<div class="border">
+  <div class="bg-light d-flex justify-content-between p-2 w-100">
+    <div>
+      {{ order.orderId }}
+    </div>
+    <div>{{ order.status }}</div>
+    <div>{{ order.orderedDateTime | date: "short" }}</div>
+  </div>
+  <div>
+    <div class="p-2">Total: &#8377;{{ getTotalPrice(order.products) }}</div>
+    <div *ngFor="let item of order.products">
+      <app-product-horizontal-card
+        [product]="item.snapshot"
+        [quantity]="item.quantity"
+        [isOrderItem]="true"
+      ></app-product-horizontal-card>
+    </div>
+  </div>
+</div>

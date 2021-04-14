@@ -1,0 +1,16 @@
+<app-loader *ngIf="$addCategoryLoader | async" [fullScreen]="true"></app-loader>
+<form ngNoForm>
+  <div class="form-group row">
+    <label for="category" class="col-sm-2 col-form-label">Category</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="category" #categoryInput />
+    </div>
+  </div>
+  <button
+    class="btn btn-primary float-right"
+    type="button"
+    (click)="addCategory(categoryInput.value)"
+  >
+    Add
+  </button>
+</form>

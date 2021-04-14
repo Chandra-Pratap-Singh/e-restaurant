@@ -1,0 +1,24 @@
+.login-singup-container {
+  height: 100vh;
+  background-image: url(../../../assets/bg-img.jpg);
+  background-size: cover;
+  position: relative;
+}
+.login-singup-inner-container {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.login-signup {
+  width: 500px;
+  border-radius: 10px;
+  background-color: var(--theme-orange);
+}
+.switch-item:focus {
+  outline: none;
+  border: 0;
+}
+
+.active-tab{
+  border-bottom: 2px solid var(--theme-orange);
+}

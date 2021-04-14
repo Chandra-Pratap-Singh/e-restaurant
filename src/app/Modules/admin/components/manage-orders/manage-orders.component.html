@@ -1,0 +1,29 @@
+<app-loader
+  *ngIf="$activeOrdersLoader | async"
+  [fullScreen]="true"
+></app-loader>
+
+<h3 class="mb-3">Manage Orders</h3>
+
+<div class="row p-0 m-0" cdkDropListGroup>
+  <div
+    class="col-xl col-md-6 col-xs-12 status-column p-1 border bg-light"
+    *ngFor="let orderGroup of $activeOrderList | async"
+    cdkDropList
+    [cdkDropListData]="[orderGroup.status]"
+    (cdkDropListDropped)="drop($event)"
+  >
+    <h6 class="py-1 text-center">
+      {{ orderGroup.status | uppercase }}
+    </h6>
+    <div *ngFor="let order of orderGroup.orders">
+      <app-admin-order-card
+        [order]="order"
+        cdkDrag
+        [cdkDragData]="{ orderId: order.orderId }"
+        (move)="moveToNextStep(order.orderId, order.status)"
+        [updateOrderStatus]="updateOrderStatus(order.orderId)"
+      ></app-admin-order-card>
+    </div>
+  </div>
+</div>
