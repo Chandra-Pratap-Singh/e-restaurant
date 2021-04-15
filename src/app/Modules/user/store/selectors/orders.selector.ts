@@ -11,3 +11,8 @@ export const orderLoaderSelector = createSelector(
   userStateSelector,
   (state: userReducer.IuserReducer) => state.orderState.orderLoader
 );
+
+export const totalOrderCountSelector = createSelector(
+  userStateSelector,
+  (state: userReducer.IuserReducer) => state.orderState.totalOrderCount
+);

@@ -9,7 +9,12 @@ export class OrdersService {
   backendBaseUrl: string = environment.backendBaseUrl;
   constructor(private http: HttpClient) {}
 
-  fetchOrder() {
-    return this.http.get(`${this.backendBaseUrl}/user/orders`);
+  fetchOrder(pageNumber: number, pageLimit: number) {
+    return this.http.get(`${this.backendBaseUrl}/user/orders`, {
+      params: {
+        pageNumber: `${pageNumber}`,
+        pageLimit: `${pageLimit}`,
+      },
+    });
   }
 }

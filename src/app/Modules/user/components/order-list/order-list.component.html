@@ -5,4 +5,11 @@
       <app-order [order]="order"></app-order>
     </div>
   </div>
+  <ngb-pagination
+    class="d-flex justify-content-center m-3"
+    [(page)]="pageNumber"
+    [pageSize]="pageLimit"
+    [collectionSize]="$totalOrderCount | async"
+    (pageChange)="changePage(value)"
+  ></ngb-pagination>
 </ng-template>
