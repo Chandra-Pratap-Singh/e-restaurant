@@ -6,6 +6,7 @@
     </div>
   </div>
   <ngb-pagination
+    *ngIf="($totalOrderCount | async) > pageLimit"
     class="d-flex justify-content-center m-3"
     [(page)]="pageNumber"
     [pageSize]="pageLimit"

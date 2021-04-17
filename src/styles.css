@@ -65,11 +65,37 @@ textarea.ng-invalid.ng-touched {
   border: 1px solid white;
 }
 
+.full-page-height {
+  min-height: calc(100vh - 70px);
+}
+
+.position-relative {
+  position: relative;
+}
+
+.pagination-bar {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+.pagination-bar::before {
+  margin-top: 500px;
+  content: " abcd";
+  display: block;
+  position: unset;
+}
+
 html,
 body {
   height: 100%;
 }
 /* body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; } */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

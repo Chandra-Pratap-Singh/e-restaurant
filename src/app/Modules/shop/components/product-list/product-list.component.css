@@ -16,9 +16,6 @@
   z-index: 1 !important;
 }
 
-.example-container {
-  min-height: calc(100vh - 70px);
-}
 
 .sidenav {
   min-width: 250px;

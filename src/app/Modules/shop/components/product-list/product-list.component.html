@@ -1,4 +1,4 @@
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="full-page-height" autosize>
   <mat-drawer
     #drawer
     class="sidenav"
@@ -40,7 +40,7 @@
       </div>
     </ng-template>
   </mat-drawer>
-  <div>
+  <div class="full-page-height">
     <div *ngIf="$productsLoader | async; else products">
       <app-loader [varient]="productsLoaderVarient"></app-loader>
     </div>
@@ -71,6 +71,7 @@
       </div>
 
       <ngb-pagination
+        *ngIf="($totalProductCount | async) > pageLimit"
         class="d-flex justify-content-center m-3"
         [(page)]="pageNumber"
         [pageSize]="pageLimit"
