@@ -23,4 +23,4 @@ export type statusType =
   | 'On Way'
   | 'Delivered';
 
-export const pageLimit: number = 1;
+export const pageLimit: number = 20;
