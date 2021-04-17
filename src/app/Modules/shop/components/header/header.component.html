@@ -4,7 +4,10 @@
     [routerLink]="['/shop', 'product-list']"
     src="../../../../../assets/logo.png"
   />
-  <div class="cursor-pointer nav-item d-lg-none" [routerLink]="['checkout']">
+  <div
+    class="cursor-pointer nav-item d-lg-none"
+    [routerLink]="['/shop', 'checkout']"
+  >
     <fa-icon [icon]="mobileCartIon" size="lg"></fa-icon>
     <span
       class="badge badge-success rounded-pill small"
@@ -27,28 +30,28 @@
     <div class="navbar-nav">
       <div
         class="mx-5 cursor-pointer nav-item p-2"
-        [routerLink]="['order-list']"
+        [routerLink]="['/shop', 'order-list']"
         routerLinkActive="active"
       >
         My Orders
       </div>
       <div
         class="mx-5 cursor-pointer nav-item p-2"
-        [routerLink]="['profile']"
+        [routerLink]="['/shop', 'profile']"
         routerLinkActive="active"
       >
         My Profile
       </div>
       <div
         class="mx-5 cursor-pointer nav-item p-2"
-        [routerLink]="['address-list']"
+        [routerLink]="['/shop', 'address-list']"
         routerLinkActive="active"
       >
         Manage Address
       </div>
       <div
         class="mx-5 cursor-pointer nav-item p-2"
-        [routerLink]="['checkout']"
+        [routerLink]="['/shop', 'checkout']"
         routerLinkActive="active"
       >
         Cart

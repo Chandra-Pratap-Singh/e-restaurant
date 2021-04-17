@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { IadminOrder } from '../modal/interfaces/IadminOrder.interface';
+import { pageLimit } from '../../../constants/constant';
 
 @Injectable({
   providedIn: 'root',
@@ -20,8 +21,13 @@ export class ProductService {
     });
   }
 
-  fetchProductList() {
-    return this.http.get(`${this.backendBaseUrl}/admin/product-list`);
+  fetchProductList(pageNumber: number, limit: number = pageLimit) {
+    const params: { pageNumber?: string; pageLimit?: string } = {};
+    if (pageNumber) params.pageNumber = `${pageNumber}`;
+    if (limit) params.pageLimit = `${limit}`;
+    return this.http.get(`${this.backendBaseUrl}/admin/product-list`, {
+      params,
+    });
   }
 
   fetchProduct(productId: string) {

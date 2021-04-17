@@ -17,6 +17,7 @@ export const key = 'adminProducts';
 
 export interface IadminProductState {
   products: IadminProduct[];
+  productsCount?: number;
   categories: Icategory[];
   productsLoader: boolean;
   categoriesLoader: boolean;
@@ -58,10 +59,11 @@ export const adminProductReducer = createReducer(
     addcategoryLoader: false,
   })),
   on(fetchProducts, (state) => ({ ...state, productsLoader: true })),
-  on(loadProducts, (state, { products }) => ({
+  on(loadProducts, (state, { products, totalCount }) => ({
     ...state,
     products,
     productsLoader: false,
+    productsCount: totalCount,
     addOrUpdateProductLoader: false,
   })),
   on(fetchProduct, (state) => ({ ...state, productLoader: true })),

@@ -5,11 +5,11 @@ import * as actionTypes from './action-types';
 
 export const loadProducts = createAction(
   actionTypes.LOAD_PRODUCTS,
-  props<{ products: Iproduct[] }>()
+  props<{ products: Iproduct[]; totalCount?: number }>()
 );
 export const fetchProducts = createAction(
   actionTypes.FETCH_PRODUCTS,
-  props<{ filters?: any }>()
+  props<{ filters?: any; pageNumber?: number; pageLimit?: number }>()
 );
 
 export const loadProductCategories = createAction(

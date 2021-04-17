@@ -15,12 +15,13 @@ export const loadActiveOrders = createAction(
 );
 
 export const fetchCompletedOrders = createAction(
-  actionTypes.FETCH_COMPLETED_ORDERS
+  actionTypes.FETCH_COMPLETED_ORDERS,
+  props<{ pageNumber?: number; pageLimit?: number }>()
 );
 
 export const loadCompletedOrders = createAction(
   actionTypes.LOAD_COMPLETED_ORDERS,
-  props<{ orders: IadminOrder[] }>()
+  props<{ orders: IadminOrder[]; totalCount?: number }>()
 );
 
 export const fetchRejectedOrders = createAction(
@@ -29,7 +30,7 @@ export const fetchRejectedOrders = createAction(
 
 export const loadRejectedOrders = createAction(
   actionTypes.LOAD_REJECTED_ORDERS,
-  props<{ orders: IadminOrder[] }>()
+  props<{ orders: IadminOrder[]; totalCount?: number }>()
 );
 
 export const addNewRequestedOrder = createAction(

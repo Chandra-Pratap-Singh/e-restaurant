@@ -4,10 +4,10 @@
     <h5>Your Cart Items</h5>
     <div *ngFor="let item of $cartItemList | async">
       <app-product-horizontal-card
-        [product]="item.product"
-        [quantity]="item.quantity"
-        (addItemToCart)="addItemToCart(item.product.productId)"
-        (removeItemFromCart)="removeItemFromCart(item.product.productId)"
+        [product]="item?.product"
+        [quantity]="item?.quantity"
+        (addItemToCart)="addItemToCart(item?.product?.productId)"
+        (removeItemFromCart)="removeItemFromCart(item?.product?.productId)"
         [isCartItem]="true"
       ></app-product-horizontal-card>
     </div>
@@ -19,7 +19,9 @@
         <button
           class="btn btn-success"
           (click)="order()"
-          [disabled]="!($activeAddress | async)"
+          [disabled]="
+            !($activeAddress | async) || !($cartItemList | async)?.length
+          "
         >
           Place Order
         </button>

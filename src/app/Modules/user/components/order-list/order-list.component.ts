@@ -41,7 +41,6 @@ export class OrderListComponent implements OnInit {
     this.$totalOrderCount = this.store.select(totalOrderCountSelector);
   }
   changePage(value) {
-    console.log(value, this.pageNumber);
     this.router.navigate(['/shop', 'order-list'], {
       queryParams: {
         pageNumber: this.pageNumber,

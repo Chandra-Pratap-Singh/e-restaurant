@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light header p-2">
   <img
     class="cursor-pointer logo navbar-brand p-0"
-    [routerLink]="['manage-order']"
+    [routerLink]="['/admin', 'manage-order']"
     src="../../../../../assets/logo.png"
   />
   <button
@@ -19,21 +19,21 @@
     <div class="navbar-nav">
       <div
         class="mr-lg-4 mr-sm-2 cursor-pointer nav-item p-2"
-        [routerLink]="['manage-order']"
+        [routerLink]="['/admin', 'manage-order']"
         routerLinkActive="active"
       >
         Manage Orders
       </div>
       <div
         class="mx-lg-4 mr-sm-2 cursor-pointer nav-item p-2"
-        [routerLink]="['completed-orders']"
+        [routerLink]="['/admin', 'completed-orders']"
         routerLinkActive="active"
       >
         Completed Orders
       </div>
       <div
         class="mx-lg-4 mr-sm-2 cursor-pointer nav-item p-2"
-        [routerLink]="['product-list']"
+        [routerLink]="['/admin', 'product-list']"
         routerLinkActive="active"
       >
         Manage Products

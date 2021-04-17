@@ -20,3 +20,13 @@ export const completedOrdersLoader = createSelector(
   adminFeatureState,
   (state) => state.adminOrders?.completedOrderLoader
 );
+
+export const completedOrdersCountSelector = createSelector(
+  adminFeatureState,
+  (state) => state.adminOrders?.completedOrdersCount
+);
+
+export const rejectedOrdersCountSelector = createSelector(
+  adminFeatureState,
+  (state) => state.adminOrders?.rejectedOrdersCount
+);

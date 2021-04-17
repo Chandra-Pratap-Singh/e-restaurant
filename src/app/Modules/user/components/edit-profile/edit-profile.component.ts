@@ -37,7 +37,6 @@ export class EditProfileComponent implements OnInit {
   }
 
   save() {
-    console.log(this.user);
     this.store.dispatch(updateUserProfile({ userProfile: this.user }));
   }
 }

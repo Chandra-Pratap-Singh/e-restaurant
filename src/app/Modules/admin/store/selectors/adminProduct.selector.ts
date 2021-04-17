@@ -40,3 +40,8 @@ export const adminAddCategoriesLoaderSelector = createSelector(
   adminFeatureState,
   (state) => state.adminProducts.addcategoryLoader
 );
+
+export const adminProductsCountSelector = createSelector(
+  adminFeatureState,
+  (state) => state.adminProducts.productsCount
+);

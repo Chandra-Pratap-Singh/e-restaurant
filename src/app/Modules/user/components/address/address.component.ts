@@ -60,7 +60,6 @@ export class AddressComponent implements OnInit {
   }
 
   save() {
-    console.log(this.address);
     this.store.dispatch(addOrUpdateAddress({ address: this.address }));
   }
 }

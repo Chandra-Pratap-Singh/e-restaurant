@@ -24,10 +24,13 @@ export const loadCategories = createAction(
   props<{ categories: Icategory[] }>()
 );
 
-export const fetchProducts = createAction(actionTypes.FETCH_PRODUCT_LIST);
+export const fetchProducts = createAction(
+  actionTypes.FETCH_PRODUCT_LIST,
+  props<{ pageNumber?: number; pageLimit: number }>()
+);
 export const loadProducts = createAction(
   actionTypes.LOAD_PRODUCT_LIST,
-  props<{ products: IadminProduct[] }>()
+  props<{ products: IadminProduct[]; totalCount: number }>()
 );
 export const fetchProduct = createAction(
   actionTypes.FETCH_PRODUCT,

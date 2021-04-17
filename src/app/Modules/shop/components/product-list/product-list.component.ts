@@ -4,10 +4,11 @@ import {
   HostListener,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { pageLimit } from 'src/app/constants/constant';
 import { loaderVarients } from 'src/app/Modules/shared/constants';
 import {
   addItemToCart,
@@ -23,6 +24,7 @@ import {
 import {
   categoriesLoaderSelector,
   productCategorySelector,
+  productsCountSelector,
   productsLoaderSelector,
   productsSelector,
 } from '../../store/selectors/products.selector';
@@ -43,8 +45,16 @@ export class ProductListComponent implements OnInit {
   openSidebar: boolean = false;
   closeIcon = faTimes;
   isScreenBig: boolean;
+  pageNumber: number;
+  pageLimit: number = pageLimit;
+  $totalProductCount: Observable<number>;
+  categoryFilter: string;
 
-  constructor(private store: Store, private route: ActivatedRoute) {}
+  constructor(
+    private store: Store,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
   @HostListener('window:resize', ['$event'])
   resizehandler() {
     if (document.body.offsetWidth > 992)
@@ -52,17 +62,35 @@ export class ProductListComponent implements OnInit {
     else this.isScreenBig = false;
   }
   ngOnInit(): void {
-    this.store.dispatch(fetchProducts({}));
+    // this.store.dispatch(fetchProducts({}));
     this.store.dispatch(fetchProductCategories());
     this.$categories = this.store.select(productCategorySelector);
     this.$productList = this.store.select(productsSelector, {});
     this.$productsLoader = this.store.select(productsLoaderSelector);
     this.$categoriesLoader = this.store.select(categoriesLoaderSelector);
-    this.route.params.subscribe((data) => {
+    this.route.queryParams.subscribe((data) => {
+      this.pageNumber = data?.pageNumber || 1;
+      this.categoryFilter = data?.category;
       this.store.dispatch(
-        fetchProducts({ filters: { category: data.category } })
+        fetchProducts({
+          filters: { category: this.categoryFilter },
+          pageNumber: this.pageNumber,
+          pageLimit,
+        })
       );
     });
+    // this.route.params.subscribe((data) => {
+    //   this.categoryFilter = data?.category;
+    //   this.categoryFilter &&
+    //     this.store.dispatch(
+    //       fetchProducts({
+    //         filters: { category: this.categoryFilter },
+    //         pageNumber: this.pageNumber,
+    //         pageLimit,
+    //       })
+    //     );
+    // });
+    this.$totalProductCount = this.store.select(productsCountSelector);
     if (document.body.offsetWidth > 992)
       this.openSidebar = this.isScreenBig = true;
     else this.isScreenBig = false;
@@ -82,5 +110,13 @@ export class ProductListComponent implements OnInit {
 
   presentInCart(productId: string): Observable<number> {
     return this.store.select(cartItemQuantitySelector, { productId });
+  }
+
+  changePage(value) {
+    this.router.navigate(['/shop', 'product-list'], {
+      queryParams: {
+        pageNumber: this.pageNumber,
+      },
+    });
   }
 }

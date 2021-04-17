@@ -16,10 +16,12 @@ export const key = 'adminOrders';
 export interface IadminOrderState {
   completedOrders?: IadminOrder[];
   completedOrderLoader: boolean;
+  completedOrdersCount?: number;
   activeOrders?: IadminOrder[];
   activeOrderLoader: boolean;
   rejectedOrders?: IadminOrder[];
   rejectedOrderLoader: boolean;
+  rejectedOrdersCount?: number;
 }
 
 const initialAdminOrdersState: IadminOrderState = {
@@ -51,19 +53,23 @@ export const adminOrderReducer = createReducer(
     ...state,
     completedOrderLoader: true,
   })),
-  on(loadCompletedOrders, (state, { orders }) => ({
-    ...state,
-    completedOrders: orders,
-    completedOrderLoader: false,
-  })),
+  on(loadCompletedOrders, (state, { orders, totalCount }) => {
+    return {
+      ...state,
+      completedOrders: orders,
+      completedOrderLoader: false,
+      completedOrdersCount: totalCount,
+    };
+  }),
   on(fetchRejectedOrders, (state) => ({
     ...state,
     rejectedOrderLoader: true,
   })),
-  on(loadRejectedOrders, (state, { orders }) => ({
+  on(loadRejectedOrders, (state, { orders, totalCount }) => ({
     ...state,
     rejectedOrders: orders,
     rejectedOrderLoader: false,
+    rejectedOrdersCount: totalCount,
   })),
   on(addNewRequestedOrder, (state, { order }) => ({
     ...state,

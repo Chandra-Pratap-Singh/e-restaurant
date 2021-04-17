@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -8,10 +8,15 @@ import { environment } from 'src/environments/environment';
 export class ProductsService {
   backendBaseUrl: string = environment.backendBaseUrl;
   constructor(private http: HttpClient) {}
-  fetchProducts(filters?: any) {
-    const params = filters?.category
-      ? new HttpParams().set('category', filters?.category)
-      : {};
+  fetchProducts(filters?: any, pageNumber?: number, pageLimit?: number) {
+    const params: {
+      pageNumber?: string;
+      pageLimit?: string;
+      category?: string;
+    } = {};
+    if (filters?.categories) params.category = filters?.category;
+    if (pageNumber) params.pageNumber = `${pageNumber}`;
+    if (pageLimit) params.pageLimit = `${pageLimit}`;
     return this.http.get(`${this.backendBaseUrl}/products`, {
       params,
     });

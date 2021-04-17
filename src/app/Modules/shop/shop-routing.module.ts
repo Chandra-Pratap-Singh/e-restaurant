@@ -18,7 +18,7 @@ const routes: Routes = [
     component: ShopComponent,
     children: [
       {
-        path: 'product-list/:category',
+        path: 'product-list',
         canActivate: [CheckCustomerEntryGuard],
         component: ProductListComponent,
       },
@@ -57,7 +57,7 @@ const routes: Routes = [
         canActivate: [CheckCustomerEntryGuard],
         component: ChangePasswordComponent,
       },
-      { path: '**', redirectTo: 'product-list/' },
+      { path: '**', redirectTo: 'product-list' },
     ],
   },
 ];

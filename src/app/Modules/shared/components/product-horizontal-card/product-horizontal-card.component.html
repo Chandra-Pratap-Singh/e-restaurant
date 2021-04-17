@@ -2,7 +2,7 @@
   class="row mx-2 py-2 border-bottom"
   [ngClass]="!isOrderItem && !product.available ? 'unavailable-product' : ''"
 >
-  <div class="col-md-2 text-center">
+  <div class="col-md-auto text-center text-lg-left">
     <img class="dish-image" [src]="product.img" height="70px" />
   </div>
   <div class="col-md-8">

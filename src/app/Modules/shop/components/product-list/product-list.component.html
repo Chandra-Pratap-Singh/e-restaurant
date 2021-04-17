@@ -1,7 +1,7 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer
     #drawer
-    class="example-sidenav"
+    class="sidenav"
     [mode]="isScreenBig ? 'side' : 'over'"
     [opened]="openSidebar"
     (openedChange)="toggleSidenavBar($event)"
@@ -29,7 +29,8 @@
         </div>
         <div class="p-3" *ngFor="let category of $categories | async">
           <button
-            [routerLink]="['/shop', 'product-list', category.category]"
+            [routerLink]="['/shop', 'product-list']"
+            [queryParams]="{ category: category?.category }"
             class="btn btn-lg btn-block btn-secondary"
             (click)="!isScreenBig && drawer.toggle()"
           >
@@ -68,6 +69,14 @@
           </div>
         </div>
       </div>
+
+      <ngb-pagination
+        class="d-flex justify-content-center m-3"
+        [(page)]="pageNumber"
+        [pageSize]="pageLimit"
+        [collectionSize]="$totalProductCount | async"
+        (pageChange)="changePage($event)"
+      ></ngb-pagination>
     </ng-template>
   </div>
 </mat-drawer-container>

@@ -38,3 +38,8 @@ export const categoriesLoaderSelector = createSelector(
   productStore,
   (state: productsReducer.IproductState) => state.categoriesLoader
 );
+
+export const productsCountSelector = createSelector(
+  productStore,
+  (state: productsReducer.IproductState) => state.productsCount
+);

@@ -18,5 +18,12 @@
         ></app-product-horizontal-card>
       </div>
     </div>
+    <ngb-pagination
+      class="d-flex justify-content-center m-3"
+      [(page)]="pageNumber"
+      [pageSize]="pageLimit"
+      [collectionSize]="$totalProductCount | async"
+      (pageChange)="changePage($event)"
+    ></ngb-pagination>
   </ng-template>
 </div>

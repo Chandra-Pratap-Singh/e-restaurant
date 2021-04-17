@@ -1,6 +1,16 @@
 <h3 class="mb-3">Completed Orders</h3>
-<div *ngFor="let order of $completedOrders | async" class="mb-2">
-  <app-admin-horizontal-order-card
-    [order]="order"
-  ></app-admin-horizontal-order-card>
-</div>
+<app-loader *ngIf="$completedOrdersLoader | async; else orderList"></app-loader>
+<ng-template #orderList>
+  <div *ngFor="let order of $completedOrders | async" class="mb-2">
+    <app-admin-horizontal-order-card
+      [order]="order"
+    ></app-admin-horizontal-order-card>
+  </div>
+  <ngb-pagination
+    class="d-flex justify-content-center m-3"
+    [(page)]="pageNumber"
+    [pageSize]="pageLimit"
+    [collectionSize]="$totalOrderCount | async"
+    (pageChange)="changePage($event)"
+  ></ngb-pagination>
+</ng-template>

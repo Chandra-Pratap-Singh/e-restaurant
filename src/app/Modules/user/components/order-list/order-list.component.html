@@ -10,6 +10,6 @@
     [(page)]="pageNumber"
     [pageSize]="pageLimit"
     [collectionSize]="$totalOrderCount | async"
-    (pageChange)="changePage(value)"
+    (pageChange)="changePage($event)"
   ></ngb-pagination>
 </ng-template>

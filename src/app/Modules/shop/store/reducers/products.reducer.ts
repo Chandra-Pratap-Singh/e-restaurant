@@ -13,6 +13,7 @@ export interface IproductState {
   categoriesLoader: boolean;
   products: Iproduct[];
   productsLoader: boolean;
+  productsCount?: number;
 }
 
 const initialProductState: IproductState = {
@@ -30,8 +31,13 @@ export const productsReducer = createReducer(
       productsLoader: true,
     };
   }),
-  on(loadProducts, (state, { products }) => {
-    return { ...state, products, productsLoader: false };
+  on(loadProducts, (state, { products, totalCount }) => {
+    return {
+      ...state,
+      products,
+      productsLoader: false,
+      productsCount: totalCount,
+    };
   }),
   on(fetchProductCategories, (state) => {
     return {
